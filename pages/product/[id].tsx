@@ -8,9 +8,9 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(`https://platzi-avo.vercel.app/api/avo`);
-  const { data }: TAPIAvoResponse = await response.json();
+  const { data }: any = await response.json();
 
-  const paths = data.map(({ id }) => ({ params: { id } }));
+  const paths = data.map(({ id }: any) => ({ params: { id } }));
 
   return {
     // Statically generate all paths
@@ -25,12 +25,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     `https://platzi-avo.vercel.app/api/avo/${params?.id}`
   );
   const product = await response.json();
-  console.log(product);
 
   return { props: { product } };
 };
 
-const ProductItem = ({ product }: { product: TProduct }) => {
+const ProductItem = ({ product }: { product: any }) => {
   return (
     <Layout>
       {product == null ? null : <ProductSummary product={product} />}

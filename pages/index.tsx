@@ -4,7 +4,7 @@ import ProductList from "components/ProductList/ProductList";
 import KawaiiHeader from "components/KawaiiHeader/KawaiiHeader";
 
 const Home = () => {
-  const [productList, setProductList] = useState<TProduct[]>([]);
+  const [productList, setProductList] = useState<any[]>([]);
 
   useEffect(() => {
     window
