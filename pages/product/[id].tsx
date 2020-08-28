@@ -6,8 +6,11 @@ import Layout from "components/Layout/Layout";
 import ProductSummary from "components/ProductSummary/ProductSummary";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+// Siempre que sea una página dinámica se deben usar ambas propiedades
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(`https://platzi-avo.vercel.app/api/avo`);
+  const response = await fetch(
+    `https://palta-app-humkdenzz.vercel.app/api/avo`
+  );
   const { data }: any = await response.json();
 
   const paths = data.map(({ id }: any) => ({ params: { id } }));
@@ -22,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const response = await fetch(
-    `https://platzi-avo.vercel.app/api/avo/${params?.id}`
+    `https://palta-app-humkdenzz.vercel.app/api/avo/${params?.id}`
   );
   const product = await response.json();
 

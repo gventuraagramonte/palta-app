@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
+import fetch from "isomorphic-unfetch";
 import Layout from "components/Layout/Layout";
 import ProductList from "components/ProductList/ProductList";
 import KawaiiHeader from "components/KawaiiHeader/KawaiiHeader";
+import { GetServerSideProps } from "next";
 
-const Home = () => {
-  const [productList, setProductList] = useState<any[]>([]);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await fetch(
+    "https://palta-app-humkdenzz.vercel.app/api/avo"
+  );
+  const { data: productList }: any = await response.json();
 
-  useEffect(() => {
-    window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data }) => {
-        setProductList(data);
-      });
-  }, []);
-
+  return {
+    props: {
+      productList: productList,
+    },
+  };
+};
+const Home = ({ productList }: { productList: any }) => {
   return (
     <Layout>
       <KawaiiHeader />
